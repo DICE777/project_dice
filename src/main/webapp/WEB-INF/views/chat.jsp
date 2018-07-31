@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
+	<!-- hi -->
 	<!--반응형 웹 적용(밑에설명O)  -->
 	<!--https://developer.mozilla.org/ko/docs/Mozilla/Mobile/Viewport_meta_tag  -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
