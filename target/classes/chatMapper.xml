@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- CHAT SQL -->
+ <mapper namespace="com.userchat.web.dao.ChatDAO">
+ 
+  <!--chat 정보가져오기  -->
+ <select id="getChatListByID" resultType="ChatDTO">
+ SELECT * FROM
+ CHAT
+ WHERE
+ ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
+ AND
+ chatID>#{chat_sequence.nextVal}
+ ORDER BY
+ chatTime
+ </select>
+<!-- 
+ ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
+ ::보낸사람이든 받은 사람이든 두 경우에 해당이 되면 모두 가져올 수 있게.
+ 
+ chatID>#{chat_sequence.nextVal} ::채팅아이디가 {}가 클 때 가져오도록.
+  -->
+  
+  
+ <!-- 대화 내역 중 최근 몇개만 뽑아서 가져오는 것  --> 
+ <select id="getChatListByRecent" resultType="ChatDTO">
+ SELECT * FROM
+ CHAT
+ WHERE
+ ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
+ AND
+ chatID>(SELECT MAX(chatID) - #{chat_sequence.nextVal} FROM CHAT)
+ ORDER BY
+ chatTime
+ </select>
+ <!-- 
+  현재 채팅DB테이블안에서 가장 채트아이디가 큰 거에서 물음표만큼 빼줌.
+  물음표에 들어가는거 넘버임.
+  -->
+ 
+ <!--누가  누구에게 메시지를 보냈다고 적어주는 기능  -->
+ <insert id="submit" parameterType="ChatDTO">
+ INSERT INTO
+ CHAT
+ VALUES(
+ NULL,
+ #{fromID},
+ #{toID},
+ #{chatContent},
+ SYSDATE
+ )
+ </insert>
+ <!--
+ null값 넣으므로써 chatID가 1개 자동으로 증가
+ 보낸사람
+ 받는사람
+ 채팅메시지
+ 현재시각
+   -->
+ </mapper>

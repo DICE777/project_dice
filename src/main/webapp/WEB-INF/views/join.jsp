@@ -1,0 +1,222 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./resources/css/bootstrap.css">
+	<link rel="stylesheet" href="./resources/css/custom.css">
+	<title>Just Say It</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="./resources/js/bootstrap.js"></script>
+	<!-- <script>
+		function registerCheckFunction(){
+			var userID = $('#userID').val();
+			$.ajax({
+				type: 'POST',
+				url : './UserRegisterCheck',
+				data: {userID:userID},
+				success: function(result){
+					if(result==1){
+						$('#checkMessage').html('사용할 수 있는 아이디 입니다.');
+						$('#checkType').attr('class','modal-content panel-success'); //attr은 속성
+						
+					} else{
+						$('#checkMessage').html('사용할 수 없는 아이디 입니다.');
+						$('#checkType').attr('class','modal-content panel-warning');
+					}
+					$('#checkModal').modal("show");
+				}
+				
+			});
+		}
+		
+		function passwordCheckFunction(){
+			var userPassword1 = $('#userPassword1').val();
+			var userPassword2 = $('#userPassword2').val();
+			if(userPassword1 != userPassword2){
+				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
+			} else{
+				$('#passwordCheckMessage').html('');
+			}
+		}
+	</script> -->
+	<!-- <script>
+	$(function(){
+		
+		$("#idck").on('click',function(){
+			
+			$.ajax({
+				url: "idcheck",
+				type: "get",
+				data: {"userID":document.getElementById('userID').value},
+				success: function(data){
+					if(data==0) alert("회원가입이 가능합니다");
+					else alert("중복된 아이디입니다");
+				},
+				error: function(data){
+					alert("통신실패");
+				}
+			});
+			
+		});
+	});
+	
+	</script> -->
+</head>
+<body>
+
+	<!--메인 페이지 세션값 설정-해당아이디 -->
+	<c:if test="${sessionScope.userID==null}">
+		${sessionScope.userID}
+	</c:if>
+
+	
+	<!--네비게이션 바 만듬  -->
+	<nav class="navbar navbar-default">
+		<!--헤더 부분  -->
+		<div class="navbar-header"> 
+			<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+			aria-expanded="false">
+			<!--아이콘 바==1개의 가로 짝대기  ,반응형웹이라 화면 줄였을 때 나오는 것-->
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<!--로고,제목  -->
+			<a class="navbar-brand" href="index.jsp">실시간 토론 채팅 사이트</a>
+		</div>
+		<!--  -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<!-- 1개의 리스트 -->
+			<ul class="nav navbar-nav">
+				<!--리스트의 항목  -->
+				<li class="active"><a href="index.jsp">메인</a>
+			</ul>
+			
+			
+			
+			<c:if test="${sessionScope.userID==null}"> 
+			<!--userID가 없으면 실행됨  -->
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"> <!-- 아래쪽으로 내려서 항목이 나올 수 있게 만들어줌 
+				#:: 어떤 위치로 이동하지 않게 만들어줌  -->
+					<a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="butsk dlfton" aria-haspopup="true"
+						aria-expanded="false">접속하기<span class="caret"></span>
+					</a>
+				
+					<!--  실제 리스트로 존재할 수 있게 ul태그로 담음 ,리스트 종류는 dropdwon-menu	 -->
+					<ul	class="dropdown-menu">
+					<!-- 리스트 항목 추가해줌  -->
+						<li><a href="login.jsp">로그인</a></li>	
+						<li><a href="join.jsp">회원가입</a></li>	
+					</ul>
+				</li>
+			</ul>
+			</c:if>
+			
+			
+			<c:if test="${sessionScope.userID!=null}">  
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"> <!--아래쪽으로 내려서 항목이 나올 수 있게 만들어줌  -->
+				<!--#:: 어떤 위치로 이동하지 않게 만들어줌  -->
+					<a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">회원관리<span class="caret"><!--caret이라는 이미지 띄워줌,아래쪽삼각형 --></span>
+					</a>
+			</ul>
+			</c:if> 
+		</div>
+	</nav>
+
+	<!--위에 까지 강좌 1  -->
+	
+	<!-- 강의2. 회원가입 -->			
+	<div class="container">
+		<form method="post" action="./userRegister">
+			<table class="table table-bordered table-hover" style="text-align: center; border :1px solid #dddddd">
+				<thead>
+					<tr><!--제목. 3개 정도 열 차지  -->
+						<th colspan="3"><h4>회원 등록 양식</h4></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td style="width: 110px;"><h5>아이디</h5></td>
+						<!--사용자가 어떤 값을 입력할 수 있도록 텍스트 박스 만듬 ,maxlenght는 ~글자가 넘어가지 않게. -->
+						<td><input class="form-control" type="text" id="userID" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
+						<td style="width: 110px;"><button class="btn btn-primary" onclick="registerCheckFunction();" type="button" id="idck">중복체크</button></td>
+					</tr>
+					<tr>
+						<td style="width: 110px;"><h5>비밀번호</h5></td>
+						<!--사용자가 어떤 값을 입력할 수 있도록 텍스트 박스 만듬 ,maxlenght는 ~글자가 넘어가지 않게. -->
+						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+						<!--onkeyup:: 어떤 메시지를 입력할 때마다 실행됨. 즉 비밀번호 입력할 때마다 위 함수가 실행된다.  -->
+					</tr>
+					<tr>
+						<td style="width: 110px;"><h5>비밀번호 확인</h5></td>
+						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="userPassword2" name="userPassword2" maxlength="20" placeholder="비밀번호 확인을 입력하세요."></td>
+					</tr>
+					<tr>
+						<td style="width: 110px;"><h5>이름</h5></td>
+						<td colspan="2"><input class="form-control" type="text" id="userName" name="userName" maxlength="20" placeholder="이름을 입력하세요."></td>
+					</tr>
+					<tr>
+						<td style="width: 110px;"><h5>나이</h5></td>
+						<td colspan="2"><input class="form-control" type="number" id="userAge" name="userAge" maxlength="20" placeholder="나이을 입력하세요."></td>
+					</tr>
+					
+					<tr>
+						<td style="width: 110px;"><h5>성별</h5></td>
+						<td colspan="2">
+							<!--라디오 버튼  -->
+							<div class="form-group" style="text-align: center; margin:0 auto;">
+								<div class="btn-group" data-toggle="buttons">
+									<!--각각의 라디오 버튼이 들어감  -->
+									<label class="btn btn-primary active">
+										<input type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
+									</label>
+
+									<label class="btn btn-primary">
+										<input type="radio" name="userGender" autocomplete="off" value="여자">여자
+									</label>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="width: 110px;"><h5>이메일</h5></td>
+						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일을 입력하세요."></td>
+					</tr>
+				</tbody>
+				
+			</table>
+		</form>
+	</div>
+	
+	<!--modal창 사용  -->
+	<%
+		String messageContent = null;
+		if(session.getAttribute("messageContent")!=null){
+			messageContent = (String)session.getAttribute("messageContent");
+		} 
+		String messageType= null;
+		if(session.getAttribute("messageType")!=null){
+			messageType = (String)session.getAttribute("messageType");
+		} 
+		if(messageContent!=null)	{
+	%>
+	<div class="">
+	</div>
+	<%
+		}
+	%>		
+		
+</body>
+</html>

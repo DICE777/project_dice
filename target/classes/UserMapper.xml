@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 회원 정보 SQL -->
+ <mapper namespace="com.userchat.web.dao.UserDAO">
+ 
+ <!--로그인 -->
+ <select id="login" parameterType="UserDTO" resultType="UserDTO">
+ 	SELECT * 
+ 	FROM
+ 	CHATUSER
+ 	WHERE
+ 	userID = #{userID}
+ </select>
+ 
+ <insert id="insertUser" parameterType="UserDTO">
+ 	INSERT INTO CHATUSER(
+ 		userID,
+	    userPassword,
+	    userName,
+	    userAge,
+	    userGender,
+	    userEmail,
+	    userProfile
+ 	)
+ 	VALUES(
+ 		#{userID},
+		#{userPassword},
+		#{userName},
+		#{userAge},
+		#{userGender},
+		#{userEmail},
+		#{userProfile}
+ 	)
+ </insert>
+ 
+ <select id="selectUser" resultType="UserDTO">
+ 	SELECT
+ 		userID,
+	    userPassword,
+	    userName,
+	    userAge,
+	    userGender,
+	    userEmail,
+	    userProfile
+	FROM
+		CHATUSER
+ </select>
+ 
+ <select id="idcheck" parameterType="UserDTO" resultType="Int">
+ 	SELECT
+ 		count(*)
+ 	FROM CHATUSER
+ 	WHERE
+ 		userID = #{userID}
+</select>
+ 
+
+ </mapper>
