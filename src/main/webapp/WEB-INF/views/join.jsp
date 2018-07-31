@@ -10,8 +10,9 @@
 	<link rel="stylesheet" href="./resources/css/custom.css">
 	<title>Just Say It</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script type="./resources/js/bootstrap.js"></script>
-	<!-- <script>
+	<script src="./resources/js/bootstrap.js"></script>
+
+	<script>
 		function registerCheckFunction(){
 			var userID = $('#userID').val();
 			$.ajax({
@@ -42,7 +43,7 @@
 				$('#passwordCheckMessage').html('');
 			}
 		}
-	</script> -->
+	</script>
 	<!-- <script>
 	$(function(){
 		
@@ -200,23 +201,58 @@
 		</form>
 	</div>
 	
-	<!--modal창 사용  -->
-	<%
-		String messageContent = null;
-		if(session.getAttribute("messageContent")!=null){
-			messageContent = (String)session.getAttribute("messageContent");
-		} 
-		String messageType= null;
-		if(session.getAttribute("messageType")!=null){
-			messageType = (String)session.getAttribute("messageType");
-		} 
-		if(messageContent!=null)	{
-	%>
-	<div class="">
-	</div>
-	<%
-		}
-	%>		
+	<!--modal창 사용.사용자 알림메시지 띄우는 것  -->
+	<c:if test="${sessionScope.messageContent!=null}">
+		${sessionScope.messageContent}
+	</c:if>
+	<c:if test="${sessionScope.messageType!=null}">
+		${sessionScope.messageType}
+	</c:if>
+	<c:if test="${messageContent!=null}">
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="vertical-alignment-helper">
+				<div class="modal-dialog vertical-align-center">
+					<div class="modal-content">
+						<c:choose>
+							<c:when test=${messageType.equals("오류 메시지")}>
+								<c:out value="panel-waring"></c:out>
+							</c:when>
+							<c:otherwise>
+								<c:out value="panel-success"></c:out>
+							</c:otherwise>
+						</c:choose>
+						
+						<div class="modal-header panel-heaidng">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times</span> <!-- x버튼에 해당하는 그림문자 띄움 -->
+								<span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title">
+								${sessionScope.messageType}
+							</h4>
+						</div>	
+						<div class="modal-body">
+							${sessionScope.messageContent}
+						</div>
+						<div class="modal-footer">
+							<!--닫기버튼  -->
+							<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$('#messageModal').modal("show");	
+		</script>
+		
+		<!--5강 8분부터 모달 삭제부분들어감 근데 서블릿 부분 앞에강의 추가해야 될 듯  -->
+		
+		
+	</c:if>
+	
+	
+	
 		
 </body>
 </html>
