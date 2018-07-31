@@ -57,7 +57,12 @@ public class HomeController {
 		
 		return "redirect:home";
 	}
-	
+	//회원가입 페이지 가는 거
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public String joinGo() {
+			
+		return "join";
+	}
 	//회원가입 페이지
 	@RequestMapping(value="/userRegister", method=RequestMethod.POST)
 	public String join(UserDTO userDTO) {
@@ -73,7 +78,7 @@ public class HomeController {
 		return "redirect:home";
 	}
 	
-	/*//아이디 중복체크 기능
+	//아이디 중복체크 기능
 	@RequestMapping(value="/idcheck",method=RequestMethod.GET)
 	public @ResponseBody int example(UserDTO userDTO) {
 		
@@ -85,7 +90,8 @@ public class HomeController {
 		
 		return result;
 		
-	}*/
+	}
+	
 	
 	//채팅 페이지
 		@RequestMapping(value="/chat")

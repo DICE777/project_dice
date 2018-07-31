@@ -13,7 +13,7 @@
 	<script src="./resources/js/bootstrap.js"></script>
 
 	<script>
-		function registerCheckFunction(){
+		/* function registerCheckFunction(){
 			var userID = $('#userID').val();
 			$.ajax({
 				type: 'POST',
@@ -33,7 +33,7 @@
 				
 			});
 		}
-		
+		 */
 		function passwordCheckFunction(){
 			var userPassword1 = $('#userPassword1').val();
 			var userPassword2 = $('#userPassword2').val();
@@ -44,7 +44,7 @@
 			}
 		}
 	</script>
-	<!-- <script>
+	<script>
 	$(function(){
 		
 		$("#idck").on('click',function(){
@@ -65,7 +65,7 @@
 		});
 	});
 	
-	</script> -->
+	</script>
 </head>
 <body>
 
@@ -138,7 +138,7 @@
 	
 	<!-- 강의2. 회원가입 -->			
 	<div class="container">
-		<form method="post" action="./userRegister">
+		<form method="post" action="userRegister">
 			<table class="table table-bordered table-hover" style="text-align: center; border :1px solid #dddddd">
 				<thead>
 					<tr><!--제목. 3개 정도 열 차지  -->
@@ -195,12 +195,15 @@
 						<td style="width: 110px;"><h5>이메일</h5></td>
 						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일을 입력하세요."></td>
 					</tr>
+					<tr>
+						<td style="text-align: left;" colspan="3"><h5 style="color: red;" id="passwordCheckMessage"></h5><input class="btn btn-primary pull-right type="submit" value="등록"></td>
+					</tr>
 				</tbody>
 				
 			</table>
 		</form>
 	</div>
-	
+	<%-- 
 	<!--modal창 사용.사용자 알림메시지 띄우는 것  -->
 	<c:if test="${sessionScope.messageContent!=null}">
 		${sessionScope.messageContent}
@@ -214,7 +217,7 @@
 				<div class="modal-dialog vertical-align-center">
 					<div class="modal-content">
 						<c:choose>
-							<c:when test=${messageType.equals("오류 메시지")}>
+							<c:when test="${sessionScope.messageType=='오류 메시지'}">
 								<c:out value="panel-waring"></c:out>
 							</c:when>
 							<c:otherwise>
@@ -251,6 +254,8 @@
 		
 	</c:if>
 	
+	
+	 --%>
 	
 	
 		

@@ -69,8 +69,8 @@
 					<!--  실제 리스트로 존재할 수 있게 ul태그로 담음 ,리스트 종류는 dropdwon-menu	 -->
 					<ul	class="dropdown-menu">
 					<!-- 리스트 항목 추가해줌  -->
-						<li><a href="login.jsp">로그인</a></li>	
-						<li><a href="join.jsp">회원가입</a></li>	
+						<li><a href="login">로그인</a></li>	
+						<li><a href="join">회원가입</a></li>	
 					</ul>
 				</li>
 			</ul>
