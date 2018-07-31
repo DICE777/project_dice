@@ -74,6 +74,13 @@ public class UserDTO {
 	public void setUserProfile(String userProfile) {
 		this.userProfile = userProfile;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [userID=" + userID + ", userPassword=" + userPassword + ", userName=" + userName + ", userAge="
+				+ userAge + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userProfile=" + userProfile
+				+ "]";
+	}
 	
 	
 	

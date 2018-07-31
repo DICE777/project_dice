@@ -22,8 +22,7 @@
 	    userName,
 	    userAge,
 	    userGender,
-	    userEmail,
-	    userProfile
+	    userEmail
  	)
  	VALUES(
  		#{userID},
@@ -31,8 +30,7 @@
 		#{userName},
 		#{userAge},
 		#{userGender},
-		#{userEmail},
-		#{userProfile}
+		#{userEmail}
  	)
  </insert>
  

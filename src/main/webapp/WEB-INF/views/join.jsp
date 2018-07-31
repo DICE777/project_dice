@@ -35,7 +35,7 @@
 		}
 		 */
 		function passwordCheckFunction(){
-			var userPassword1 = $('#userPassword1').val();
+			var userPassword1 = $('#userPassword').val();
 			var userPassword2 = $('#userPassword2').val();
 			if(userPassword1 != userPassword2){
 				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
@@ -156,7 +156,7 @@
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호</h5></td>
 						<!--사용자가 어떤 값을 입력할 수 있도록 텍스트 박스 만듬 ,maxlenght는 ~글자가 넘어가지 않게. -->
-						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="userPassword" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
 						<!--onkeyup:: 어떤 메시지를 입력할 때마다 실행됨. 즉 비밀번호 입력할 때마다 위 함수가 실행된다.  -->
 					</tr>
 					<tr>
@@ -196,7 +196,7 @@
 						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일을 입력하세요."></td>
 					</tr>
 					<tr>
-						<td style="text-align: left;" colspan="3"><h5 style="color: red;" id="passwordCheckMessage"></h5><input class="btn btn-primary pull-right type="submit" value="등록"></td>
+						<td style="text-align: left;" colspan="3"><h5 style="color: red;" id="passwordCheckMessage"></h5><input class="btn btn-primary pull-right" type="submit" value="등록"></td>
 					</tr>
 				</tbody>
 				

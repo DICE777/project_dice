@@ -75,7 +75,7 @@ public class HomeController {
 		
 		System.out.println("회원가입 완료");
 		
-		return "redirect:home";
+		return "redirect:/";
 	}
 	
 	//아이디 중복체크 기능
