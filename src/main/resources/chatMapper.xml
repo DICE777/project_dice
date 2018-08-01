@@ -33,6 +33,8 @@
  ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
  AND
  chatID>(SELECT MAX(chatID) - #{chat_sequence.nextVal} FROM CHAT)
+ AND
+ <![CDATA[ ROWNUM <= 10 ]]>
  ORDER BY
  chatTime
  </select>

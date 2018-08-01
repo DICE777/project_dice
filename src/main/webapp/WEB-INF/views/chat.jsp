@@ -32,7 +32,13 @@
 	<!--부트스트랩 프레이워크에서 제공하는 js파일 가져옴  -->
 	<script src="./resources/js/bootstrap.js"></script>
 	
-	<script type="text/javascript">
+	<script>
+	$(function(){
+		$('#send').on('click', function(){
+			submitFunction();
+		});
+	});
+	
 		function autoClosingAlert(selector,delay){
 			var alert= $(selector).alert();
 			alert.show(); //팝업처럼 보여줄 수 있게 만들어줌
@@ -41,8 +47,10 @@
 		
 		//메시지보내는 submit기능
 		function submitFunction(){
-			var fromID = ${sessionScope.userID};
-			var toID = ${sessionScope.toID};
+			alert("하이");
+			
+			var fromID = $('.userId').val();
+			var toID = $('.toId').val(); 
 			var chatContent = $('#chatContent').val(); //입력한 값을 가져올 수 있게함.
 			
 			$.ajax({
@@ -53,6 +61,7 @@
 					toID : encodeURIComponent(toID),
 					chatContent : encodeURIComponent(chatContent),
 				},
+				dataType: 'int',
 				success: function(result){
 					if(result==1){
 						autoClosingAlert('#successMessage',2000); //성공하면  팝업알림창들 띄워줌 ex) 메시지 성공했습니다 //2초동안
@@ -62,6 +71,9 @@
 					} else{
 						autoClosingAlert('#waringMessage',2000);
 					}
+				},
+				complete: function(result){
+					alert("aaa");
 				}
 			});
 			//성공적으로 값을 보냈은 아니든 
@@ -71,6 +83,8 @@
 	</script>
 </head>
 <body>
+	<input class="userId" type="hidden" value="${sessionScope.userID}">
+	<input class="toId" type="hidden" value="${sessionScope.toID}">
 	
 	<!--네비게이션 바 만듬  -->
 	<nav class="navbar navbar-default">
@@ -159,7 +173,7 @@
 									<textarea style="hegiht:80px;"	id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 								</div>
 								<div class="form-group col-xs-2">
-									<button type="button" class="btn btn-default pull-right" onclick="submitFunction();">전송</button>
+									<button type="button" class="btn btn-default pull-right" id="send">전송</button> <!--onclick="submitFunction();"  -->
 									<div class="clearfix"></div>
 									
 								</div>

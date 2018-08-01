@@ -41,6 +41,11 @@ public class ChatDTO {
 	public void setChatTime(String chatTime) {
 		this.chatTime = chatTime;
 	}
+	@Override
+	public String toString() {
+		return "ChatDTO [chatID=" + chatID + ", fromID=" + fromID + ", toID=" + toID + ", chatContent=" + chatContent
+				+ ", chatTime=" + chatTime + "]";
+	}
 	
 	
 	
