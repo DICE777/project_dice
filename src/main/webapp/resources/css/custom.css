@@ -44,3 +44,23 @@ tr th:last-child{
 	border-bottom-right-radius: 6px;
 }
 
+/* 모달 팝업창 관련 디자인 처리  */
+.vertical-alignment-helper{
+	dispaly : table;
+	height: 100%;
+	width: 100%
+	pointer-events : none;
+}
+
+.vertical-align-center{
+	display: table-cell;
+	vertical-align: middle;
+	pointer-events : none;
+}
+
+.modal-content{
+	width: inherit;
+	height: inherit;
+	margin: 0 auto;
+	pointer-events : all;
+}

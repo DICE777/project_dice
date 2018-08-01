@@ -13,11 +13,35 @@
 	<script src="./resources/js/bootstrap.js"></script>
 
 	<script>
-		/* function registerCheckFunction(){
+	/* $(function registerCheckFunction(){
+			
+			$("#idck").on('click',function(){
+				
+				$.ajax({
+					url: "idcheck",
+					type: "get",
+					data: {"userID":document.getElementById('userID').value},
+					success: function(result){
+						if(result==1){
+							$('#checkMessage').html('사용할 수 있는 아이디 입니다.');
+							$('#checkType').attr('class','modal-content panel-success'); //attr은 속성
+							
+						} else{
+							$('#checkMessage').html('사용할 수 없는 아이디 입니다.');
+							$('#checkType').attr('class','modal-content panel-warning');
+						}
+						$('#checkModal').modal("show");
+					}
+				});
+				
+			});
+	});	 수정중인거 */
+	
+		function registerCheckFunction(){
 			var userID = $('#userID').val();
 			$.ajax({
 				type: 'POST',
-				url : './UserRegisterCheck',
+				url : 'UserRegisterCheck', //'./UserRegisterCheck'
 				data: {userID:userID},
 				success: function(result){
 					if(result==1){
@@ -33,7 +57,8 @@
 				
 			});
 		}
-		 */
+		
+		
 		function passwordCheckFunction(){
 			var userPassword1 = $('#userPassword').val();
 			var userPassword2 = $('#userPassword2').val();
@@ -43,8 +68,8 @@
 				$('#passwordCheckMessage').html('');
 			}
 		}
-	</script>
-	<script>
+	</script>   
+	<!-- <script>
 	$(function(){
 		
 		$("#idck").on('click',function(){
@@ -65,12 +90,12 @@
 		});
 	});
 	
-	</script>
+	</script> -->
 </head>
 <body>
 
 	<!--메인 페이지 세션값 설정-해당아이디 -->
-	<c:if test="${sessionScope.userID==null}">
+	<c:if test="${sessionScope.userID!=null}">
 		${sessionScope.userID}
 	</c:if>
 
@@ -95,7 +120,7 @@
 			<!-- 1개의 리스트 -->
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
-				<li class="active"><a href="index.jsp">메인</a>
+				<li class="active"><a href="index">메인</a>
 			</ul>
 			
 			
@@ -113,8 +138,8 @@
 					<!--  실제 리스트로 존재할 수 있게 ul태그로 담음 ,리스트 종류는 dropdwon-menu	 -->
 					<ul	class="dropdown-menu">
 					<!-- 리스트 항목 추가해줌  -->
-						<li><a href="login.jsp">로그인</a></li>	
-						<li><a href="join.jsp">회원가입</a></li>	
+						<li><a href="login">로그인</a></li>	
+						<li><a href="join">회원가입</a></li>	
 					</ul>
 				</li>
 			</ul>
@@ -203,7 +228,7 @@
 			</table>
 		</form>
 	</div>
-	<%-- 
+	
 	<!--modal창 사용.사용자 알림메시지 띄우는 것  -->
 	<c:if test="${sessionScope.messageContent!=null}">
 		${sessionScope.messageContent}
@@ -211,6 +236,7 @@
 	<c:if test="${sessionScope.messageType!=null}">
 		${sessionScope.messageType}
 	</c:if>
+	
 	<c:if test="${messageContent!=null}">
 		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="vertical-alignment-helper">
@@ -225,7 +251,7 @@
 							</c:otherwise>
 						</c:choose>
 						
-						<div class="modal-header panel-heaidng">
+						<div class="modal-header panel-heading">
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">&times</span> <!-- x버튼에 해당하는 그림문자 띄움 -->
 								<span class="sr-only">Close</span>
@@ -234,6 +260,7 @@
 								${sessionScope.messageType}
 							</h4>
 						</div>	
+						<!-- 메시지 내용 사용자에게 보여줄건지 -->
 						<div class="modal-body">
 							${sessionScope.messageContent}
 						</div>
@@ -246,16 +273,48 @@
 			</div>
 		</div>
 		<script>
-			$('#messageModal').modal("show");	
+			$('#messageModal').modal("show"); //사용자에게 모달창 보여지게
 		</script>
+		<!-- session.removeAttribute("messageContent"); -->
 		
-		<!--5강 8분부터 모달 삭제부분들어감 근데 서블릿 부분 앞에강의 추가해야 될 듯  -->
+		<%-- 
+		<c:remove var="${sessionScope.messageContent}"/> <!-- 모달창 띄워준 다음 세션 파기해줌. 단 한번만 사용자에게 메시지 보여줄 수 있게 만듬. -->
+		<c:remove var="${sessionScope.messageType}"/>
 		
-		
+		오류생긴다
+		 --%>
+		<!-- 위 2개는 서버로 부터 받은 어떠한 세션 값   .회원가입시도시 오류가 발생하면 이 메시지가 세션값으로 설정되는 것.-->
 	</c:if>
 	
+	<!-- modal. 회원가입 아이디 중복체크할때 설정.중복체크할때마다 여부에 따라 이 쪽부분이 실제 사용자 화면에 띄워짐. -->
+	<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="vertical-alignment-helper">
+				<div class="modal-dialog vertical-align-center">
+					<div id="checkType" class="modal-content panel-info"><!--정보를 띄워주는 모달창  -->
+						<div class="modal-header panel-heading">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times</span> <!-- x버튼에 해당하는 그림문자 띄움 -->
+								<span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title">
+								확인 메시지
+							</h4>
+						</div>	
+						<!-- 메시지 내용 사용자에게 보여줄건지 -->
+						<div id="checkMessage" class="modal-body">
+						</div>
+						<div class="modal-footer">
+							<!--닫기버튼  -->
+							<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	
-	 --%>
+	
 	
 	
 		

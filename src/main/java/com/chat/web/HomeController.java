@@ -11,6 +11,7 @@ import javax.xml.ws.Response;
 
 import org.apache.ibatis.javassist.compiler.TokenId;
 import org.apache.ibatis.session.SqlSession;
+import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.userchat.web.dao.ChatDAO;
 import com.userchat.web.dao.UserDAO;
@@ -41,6 +43,7 @@ public class HomeController {
 	public String home() {
 		
 		return "index";
+		
 	}
 	
 	//로그인 페이지
@@ -57,27 +60,64 @@ public class HomeController {
 		
 		return "redirect:home";
 	}
+	
 	//회원가입 페이지 가는 거
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String joinGo() {
 			
 		return "join";
-	}
-	//회원가입 페이지
-	@RequestMapping(value="/userRegister", method=RequestMethod.POST)
-	public String join(UserDTO userDTO) {
 		
+	}
+	
+	//회원가입 기능 
+	@RequestMapping(value="/userRegister", method=RequestMethod.POST)
+	public String join(UserDTO userDTO,HttpSession hsession,Model model) {
+		
+		String userID = userDTO.getUserID();
+		String userPassword = userDTO.getUserPassword();
+		String userPassword2 = userDTO.getUserPassword();
+		String userName = userDTO.getUserName();
+		int userAge = userDTO.getUserAge();
+		String userGender = userDTO.getUserGender();
+		String userEmail = userDTO.getUserEmail();
+		String userProfile= userDTO.getUserProfile();
+		
+		if(userID==null || userID.equals("") || userPassword==null || userPassword.equals("")
+				|| userPassword2==null || userPassword2.equals("")|| userName==null || userName.equals("")
+				|| userAge==0 || userGender==null || userGender.equals("")|| userEmail==null || userEmail.equals("")) {
+			//request.getSession().setAttribute("messageType", "오류 메시지");
+			hsession.setAttribute("messageType", "오류 메시지");
+			hsession.setAttribute("messageContent", "모든 내용을 입력하세요.");
+			return "join";
+		}
+		if(!userPassword.equals(userPassword2)) {
+			hsession.setAttribute("messageType", "오류 메시지");
+			hsession.setAttribute("messageContent", "비밀번호가 서로 다릅니다.");
+			return "join";
+		}
+		
+		//회원가입시켜줌
+
 		System.out.println(userDTO);
 		
 		UserDAO mapper = session.getMapper(UserDAO.class);
 		
-		mapper.insertUser(userDTO);
+		int count= mapper.insertUser(userDTO);
 		
-		System.out.println("회원가입 완료");
+		if(count==1) {
+			hsession.setAttribute("userID", userID);
+			hsession.setAttribute("messageType", "성공 메시지");
+			hsession.setAttribute("messageContent", "회원가입에 성공했습니다");
+			return "index";
+		} else {
+			hsession.setAttribute("messageType", "오류 메시지");
+			hsession.setAttribute("messageContent", "이미 존재하는 회원입니다.");
+			return "join";
+		}
 		
-		return "redirect:/";
+		
 	}
-	
+	/*
 	//아이디 중복체크 기능
 	@RequestMapping(value="/idcheck",method=RequestMethod.GET)
 	public @ResponseBody int example(UserDTO userDTO) {
@@ -92,15 +132,9 @@ public class HomeController {
 		
 	}
 	
+	*/
 	
-	//채팅 페이지
-		@RequestMapping(value="/chat")
-		public String chatGO() {
-			
-			return "chat";
-		}
-	
-	/*@RequestMapping(value="/UserRegisterCheck",method=RequestMethod.POST)
+	@RequestMapping(value="/UserRegisterCheck",method=RequestMethod.POST)
 	public @ResponseBody int UserRegisterCheck(UserDTO userDTO) {
 		
 		UserDAO mapper = session.getMapper(UserDAO.class);
@@ -112,27 +146,6 @@ public class HomeController {
 		return result;
 		
 	}
-	*/
-		//////////////////////8강3분부터~~~~~
-	/*@RequestMapping(value="/",method=RequestMethod.POST)
-	public String ChatSubmit(ChatDTO chatDTO,Model model) {
+	
 		
-		ChatDAO mapper = session.getMapper(ChatDAO.class);
-		
-		int result = mapper.submit(chatDTO);
-		
-		int fromID = chatDTO.getChatID();
-		String toID = chatDTO.getToID();
-		String chatContent= chatDTO.getChatContent();
-		
-		if(fromID==0 || toID==null || toID.equals("")
-				|| chatContent ==null || chatContent.equals("")) {
-			model.addAttribute("0");
-		} else {
-			
-		}
-		
-		
-		return null;
-	}*/
 }

@@ -42,7 +42,24 @@
   -->
  
  <!--누가  누구에게 메시지를 보냈다고 적어주는 기능  -->
- <insert id="submit" parameterType="ChatDTO">
+ <insert id="submit" parameterType="int">
+ INSERT INTO
+ CHAT
+ VALUES(
+ NULL,
+ #{value},
+ #{value},
+ #{value},
+ SYSDATE
+ )
+ </insert>
+ <!--
+ 전송여부 확인이라 int
+ null값 넣으므로써 chatID가 1개 자동으로 증가
+ 보낸사람
+ 받는사람
+ 채팅메시지
+ 현재시각
  INSERT INTO
  CHAT
  VALUES(
@@ -52,12 +69,5 @@
  #{chatContent},
  SYSDATE
  )
- </insert>
- <!--
- null값 넣으므로써 chatID가 1개 자동으로 증가
- 보낸사람
- 받는사람
- 채팅메시지
- 현재시각
    -->
  </mapper>
