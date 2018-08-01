@@ -51,7 +51,7 @@
 				data: {
 					fromID : encodeURIComponent(fromID),
 					toID : encodeURIComponent(toID),
-					chatContent : encodeURIComponent(chatContent)
+					chatContent : encodeURIComponent(chatContent),
 				},
 				success: function(result){
 					if(result==1){

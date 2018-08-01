@@ -118,7 +118,7 @@ public class HomeController {
 		
 	}
 	/*
-	//아이디 중복체크 기능
+	//아이디 중복체크 기능 (실행되는 것)
 	@RequestMapping(value="/idcheck",method=RequestMethod.GET)
 	public @ResponseBody int example(UserDTO userDTO) {
 		
@@ -134,6 +134,7 @@ public class HomeController {
 	
 	*/
 	
+	//작업중인거
 	@RequestMapping(value="/UserRegisterCheck",method=RequestMethod.POST)
 	public @ResponseBody int UserRegisterCheck(UserDTO userDTO) {
 		

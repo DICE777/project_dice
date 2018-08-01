@@ -98,7 +98,6 @@
 	<c:if test="${sessionScope.userID!=null}">
 		${sessionScope.userID}
 	</c:if>
-
 	
 	<!--네비게이션 바 만듬  -->
 	<nav class="navbar navbar-default">
