@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- hihihi -->
 	<!--메인 페이지 세션값 설정-해당아이디 -->
 	<c:if test="${sessionScope.userID!=null}">
 		${sessionScope.userID}
