@@ -84,27 +84,40 @@
 			var toID = $('.toId').val(); 
 			$.ajax({
 				
-				type= "POST",
+				type: "POST",
 				url: "chatList",
 				data: {
 					fromID : encodeURIComponent(fromID),
 					toID : encodeURIComponent(toID),
-					listType : type
-				},
+				}, 
 				success: function(data){
 					if(data=="") return;
-					var parsed = JSON.parse(data);
-					var result = parsed.result;
-					for(var i=0; i<result.length; i++){
-						addChat(result[i][0].value, result[i][2].value, result[i][3].value)	
+					var parsed = JSON.parse(data); //제이슨 형태로 파싱하고
+					var result = parsed.result; //result에 담아줌
+					for(var i=0; i<result.length; i++){ //실제화면에 메시지 하나씩 출력
+						addChat(result[i][0].value, result[i][2].value, result[i][3].value);
 					}
-					lastID= Number(parsed.last);
+					lastID= Number(parsed.last); //chatList컨트롤러에서 last에 해당하는 가장 마지막에 전달받은하는 chatID가져올수있게해줌.
 				}
-				
 			});
 		}
-		//누가,어떤내용,언제보냈는지
+		
+
+		/* 
+		result : [ [{value:FromID}, {value:toId}, {value:chatcontent}, {value:chattime}]   ]
+		
+		[{value:Fromid},{value:toId},{value:toId},{value:toId}},
+			{value:Fromid,toId,chatcontent,chattime},
+			{value:Fromid,toId,chatcontent,chattime},
+			{value:Fromid,toId,chatcontent,chattime},
+			{value:Fromid,toId,chatcontent,chattime},
+			{value:Fromid,toId,chatcontent,chattime},
+			{value:Fromid,toId,chatcontent,chattime}]
+		
+		 */
+		//채팅보낸사람,어떤내용,언제보냈는지 실제로 우리 화면에 출력하게 만들어줌
 		function addChat(chatName, chatContent, chatTime){
+			//chatList에 어떠한 내용을 추가적으로 넣어주는거(div에)
 			$('#chatList').append('<div class="row">'+
 						'<div class="col-lg-12">' +
 						'<div class="media">' +
@@ -126,12 +139,12 @@
 						'</div>'+
 						'</div>'+
 						'<hr>');				
-			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
+			$('#chatList').scrollTop($('#chatList')[0].scrollHeight); //스크롤 가장 아래쪽으로 내려줘서 메시지 올때마다 보여줄수있게해줌.
 		}
-		function getInfiniteChat(){
+		function getInfiniteChat(){ //몇 초 간격으로 새로운 메시지 가져오는 걸 의미
 			setInterval(function(){
 				chatListFunction(lastID);
-			},3000);
+			},3000); //3초에 1번씩 실행됨
 		}
 	</script>
 </head>
@@ -152,14 +165,14 @@
 			<span class="icon-bar"></span>
 			</button>
 			<!--로고,제목  -->
-			<a class="navbar-brand" href="index.jsp">실시간 토론 채팅 사이트</a>
+			<a class="navbar-brand" href="./">실시간 토론 채팅 사이트</a>
 		</div>
 		<!--  -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- 1개의 리스트 -->
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
-				<li class="active"><a href="index">메인</a>
+				<li class="active"><a href="./">메인</a>
 			</ul>
 			
 			
@@ -211,7 +224,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div id="chat" class="panel-collapse collapse in">
-						<div id="chatList" class="porlet-body chat-widget" style="overflow-y: auto; width:auto; height:600px;">
+						<div id="chatList" class="portlet-body chat-widget" style="overflow-y: auto; width:auto; height:600px;">
 						</div>
 						<div class="portlet-footer">
 							<!--
@@ -344,7 +357,7 @@
 	%>	
 	 --%>
 	<script type="text/javascript">
-
+	//함수실행하게 3초간격으로 채팅메시지 가져올수있어!
 	$(document).ready(function(){
 		chatListFunction('ten');
 		getInfiniteChat();

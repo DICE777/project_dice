@@ -46,8 +46,17 @@ public class HomeController {
 		
 	}
 	
+	
+	//로그인 페이지 가는 거
+		@RequestMapping(value = "/login", method = RequestMethod.GET)
+		public String loginGo() {
+			
+			return "login";
+			
+		}
+	
 	//로그인 페이지
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/userLogin", method=RequestMethod.POST)
 	public String login(HttpSession hsession,UserDTO userDTO) {
 		
 		UserDAO mapper = session.getMapper(UserDAO.class);
@@ -58,7 +67,7 @@ public class HomeController {
 		
 		System.out.println("로그인 메소드 완료");
 		
-		return "redirect:home";
+		return "redirect:/";
 	}
 	
 	//회원가입 페이지 가는 거
@@ -117,7 +126,7 @@ public class HomeController {
 		
 		
 	}
-	/*
+	
 	//아이디 중복체크 기능 (실행되는 것)
 	@RequestMapping(value="/idcheck",method=RequestMethod.GET)
 	public @ResponseBody int example(UserDTO userDTO) {
@@ -132,8 +141,8 @@ public class HomeController {
 		
 	}
 	
-	*/
 	
+	/*
 	//작업중인거
 	@RequestMapping(value="/UserRegisterCheck",method=RequestMethod.POST)
 	public @ResponseBody int UserRegisterCheck(UserDTO userDTO) {
@@ -148,5 +157,5 @@ public class HomeController {
 		
 	}
 	
-		
+		*/
 }

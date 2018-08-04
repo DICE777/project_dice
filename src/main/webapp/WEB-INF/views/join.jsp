@@ -37,7 +37,9 @@
 			});
 	});	 수정중인거 */
 	
-		function registerCheckFunction(){
+	/* 	
+	제대로된 중복체크인데 난 실행안됨
+	function registerCheckFunction(){
 			var userID = $('#userID').val();
 			$.ajax({
 				type: 'POST',
@@ -57,7 +59,7 @@
 				
 			});
 		}
-		
+		 */
 		
 		function passwordCheckFunction(){
 			var userPassword1 = $('#userPassword').val();
@@ -69,7 +71,7 @@
 			}
 		}
 	</script>   
-	<!-- <script>
+	<script>
 	$(function(){
 		
 		$("#idck").on('click',function(){
@@ -90,7 +92,7 @@
 		});
 	});
 	
-	</script> -->
+	</script>
 </head>
 <body>
 
@@ -112,14 +114,14 @@
 			<span class="icon-bar"></span>
 			</button>
 			<!--로고,제목  -->
-			<a class="navbar-brand" href="index.jsp">실시간 토론 채팅 사이트</a>
+			<a class="navbar-brand" href="./">실시간 토론 채팅 사이트</a>
 		</div>
 		<!--  -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- 1개의 리스트 -->
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
-				<li class="active"><a href="index">메인</a>
+				<li class="active"><a href="./">메인</a>
 			</ul>
 			
 			

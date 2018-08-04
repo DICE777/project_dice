@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -89,6 +88,27 @@
 			</c:if> 
 		</div>
 	</nav>
-
+	<div class="container">
+		<form method="post" action="userLogin">
+			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr colspan="2"><h4>로그인 양식</h4></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width:110px;"><h5>아이디</h5></td>
+						<td><input class="form-control" type="text" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
+					</tr>
+					<tr>
+						<td style="width:110px;"><h5>비밀번호</h5></td>
+						<td><input class="form-control" type="text" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+					</tr>
+					<tr>
+						<td style="text-align:left;" colspan="2"><input class="btn btn-primary pull-right" type="submit" value="로그인"></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
 </body> 
 </html>
