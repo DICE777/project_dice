@@ -70,6 +70,17 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
+	//로그아웃기능
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession hsession) {
+		
+		hsession.invalidate();
+		
+		System.out.println("로그아웃 완료");
+		
+		return "redirect:/";
+	}
+	
 	//회원가입 페이지 가는 거
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String joinGo() {

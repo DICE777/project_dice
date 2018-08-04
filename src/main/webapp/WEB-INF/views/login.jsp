@@ -101,7 +101,7 @@
 					</tr>
 					<tr>
 						<td style="width:110px;"><h5>비밀번호</h5></td>
-						<td><input class="form-control" type="text" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+						<td><input class="form-control" type="password" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
 					</tr>
 					<tr>
 						<td style="text-align:left;" colspan="2"><input class="btn btn-primary pull-right" type="submit" value="로그인"></td>

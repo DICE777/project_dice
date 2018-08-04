@@ -206,6 +206,10 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">회원관리<span class="caret"><!--caret이라는 이미지 띄워줌,아래쪽삼각형 --></span>
 					</a>
+					
+					<ul	class="dropdown-menu">
+						<li><a href="logout">로그아웃</a></li>	
+					</ul>
 			</ul>
 			</c:if> 
 		</div>

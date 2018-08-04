@@ -25,11 +25,12 @@
 	
 </head>
 <body>
+<%-- 
 	<!--메인 페이지 세션값 설정-해당아이디 -->
 	<c:if test="${sessionScope.userID!=null}">
 		${sessionScope.userID}
 	</c:if>
-
+ --%>
 	
 	<!--네비게이션 바 만듬  -->
 	<nav class="navbar navbar-default">
@@ -85,6 +86,9 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">회원관리<span class="caret"><!--caret이라는 이미지 띄워줌,아래쪽삼각형 --></span>
 					</a>
+					<ul	class="dropdown-menu">
+						<li><a href="logout">로그아웃</a></li>	
+					</ul>
 			</ul>
 			</c:if> 
 		</div>
