@@ -44,15 +44,9 @@
   -->
  
  <!--누가  누구에게 메시지를 보냈다고 적어주는 기능  -->
- <insert id="submit" parameterType="int">
- INSERT INTO
- CHAT
- VALUES(
- NULL,
- #{value},
- #{value},
- #{value},
- SYSDATE
+ <insert id="submit" parameterType="ChatDTO">
+ INSERT INTO CHAT
+ VALUES(chat_sequence.nextVal, #{fromID}, #{toID}, #{chatContent}, SYSDATE
  )
  </insert>
  <!--

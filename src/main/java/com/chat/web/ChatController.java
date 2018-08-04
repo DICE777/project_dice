@@ -83,7 +83,9 @@ public class ChatController {
 	//전송
 	@RequestMapping(value="/ChatSubmit",method=RequestMethod.POST)
 	public @ResponseBody int ChatSubmit(ChatDTO chatDTO) { //내가 넘겨줄 값의 타입을 적는 것. 여기서는 int.
+		
 		System.out.println(chatDTO);		
+		
 		ChatDAO mapper = session.getMapper(ChatDAO.class);
 		
 		int result = mapper.submit(chatDTO);
@@ -91,6 +93,7 @@ public class ChatController {
 		System.out.println(result);
 		
 		//String fromID= request.getParameter("fromID");
+		/*
 		int fromID = chatDTO.getChatID();
 		String toID = chatDTO.getToID();
 		String chatContent= chatDTO.getChatContent();

@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- hihihi -->
 	<!--메인 페이지 세션값 설정-해당아이디 -->
 	<c:if test="${sessionScope.userID!=null}">
 		${sessionScope.userID}
@@ -39,16 +38,15 @@
 			submitFunction();
 		});
 	});
-	
+
 		function autoClosingAlert(selector,delay){
 			var alert= $(selector).alert();
 			alert.show(); //팝업처럼 보여줄 수 있게 만들어줌
-			window.setTimeout(function() { alert.hide() },delay) //딜레이만큼 시간동안만 보여줌	
+			window.setTimeout(function() { alert.hide() },delay); //딜레이만큼 시간동안만 보여줌	
 		}
 		
 		//메시지보내는 submit기능
 		function submitFunction(){
-			alert("하이");
 			
 			var fromID = $('.userId').val();
 			var toID = $('.toId').val(); 
@@ -62,24 +60,24 @@
 					toID : encodeURIComponent(toID),
 					chatContent : encodeURIComponent(chatContent),
 				},
-				dataType: 'int',
+				dataType: 'text',
 				success: function(result){
 					if(result==1){
 						autoClosingAlert('#successMessage',2000); //성공하면  팝업알림창들 띄워줌 ex) 메시지 성공했습니다 //2초동안
 						
-					} else if(reuslt==0){
+					} else if(result==0){
 						autoClosingAlert('#dangerMessage',2000);
 					} else{
-						autoClosingAlert('#waringMessage',2000);
+						autoClosingAlert('#warningMessage',2000);
 					}
 				},
-				complete: function(result){
-					alert("aaa");
-				}
+				error : function(request,status,error){
+			          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    }
 			});
 			//성공적으로 값을 보냈은 아니든 
 			$('#chatContent').val(''); //메시지 보냈으니 값을 비워줘.
-		}
+		} 
 	
 	</script>
 </head>
@@ -190,10 +188,10 @@
 	<div class="alert alert-success" id="successMessage" style="display: none;">
 		<strong>메시지 전송에 성공했습니다.</strong>
 	</div>
-	<div class="alert alert-success" id="dangerMessage" style="display: none;">
+	<div class="alert alert-danger" id="dangerMessage" style="display: none;">
 		<strong>이름과 내용을 모두 입력해주세요.</strong>
 	</div>
-	<div class="alert alert-success" id="waringMessage" style="display: none;">
+	<div class="alert alert-warning" id="warningMessage" style="display: none;">
 		<strong>데이터베이스 오류가 발생했습니다.</strong>
 	</div>
 </body> 
