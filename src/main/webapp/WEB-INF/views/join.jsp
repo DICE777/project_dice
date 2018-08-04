@@ -312,9 +312,20 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
+	<script>
+		$('#messageModel').modal("show");
+		$(document).ready(function(){
+			chatListFunction('ten');
+			getInfiniteChat();
+		});
+	</script>
+	<%-- 
+	<%
+		session.removeAttribute("messageContent");
+		session.removeAttribute("messageType");
+		}
+	%>	
+	 --%>
 	
 		
 </body>

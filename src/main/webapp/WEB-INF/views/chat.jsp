@@ -78,7 +78,61 @@
 			//성공적으로 값을 보냈은 아니든 
 			$('#chatContent').val(''); //메시지 보냈으니 값을 비워줘.
 		} 
-	
+		var lastID = 0; //가장 마지막으로 대화 데이터의 chatID가 됨
+		function chatListFunction(type){
+			var fromID =$('.userId').val();
+			var toID = $('.toId').val(); 
+			$.ajax({
+				
+				type= "POST",
+				url: "chatList",
+				data: {
+					fromID : encodeURIComponent(fromID),
+					toID : encodeURIComponent(toID),
+					listType : type
+				},
+				success: function(data){
+					if(data=="") return;
+					var parsed = JSON.parse(data);
+					var result = parsed.result;
+					for(var i=0; i<result.length; i++){
+						addChat(result[i][0].value, result[i][2].value, result[i][3].value)	
+					}
+					lastID= Number(parsed.last);
+				}
+				
+			});
+		}
+		//누가,어떤내용,언제보냈는지
+		function addChat(chatName, chatContent, chatTime){
+			$('#chatList').append('<div class="row">'+
+						'<div class="col-lg-12">' +
+						'<div class="media">' +
+						'<a class ="pull-left" href="#">' +
+						'<img class="media-object img-circle" style="width: 30px; height :30px;" src="images/icon.png" alt="">'+ 
+						'</a>' +
+						'<div class="media-body">' +
+						'<h4 class="media-heading">' +
+						chatName +
+						'<span class= "small pull-right">'+
+						chatTime +
+						'</span>'+
+						'</h4>'+
+						'<p>'+
+						chatContent +
+						'</p>'+
+						'</div>'+
+						'</div>'+
+						'</div>'+
+						'</div>'+
+						'<hr>');				
+			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
+		}
+		function getInfiniteChat(){
+			setInterval(function(){
+				chatListFunction(lastID);
+			},3000);
+		}
 	</script>
 </head>
 <body>
@@ -194,5 +248,109 @@
 	<div class="alert alert-warning" id="warningMessage" style="display: none;">
 		<strong>데이터베이스 오류가 발생했습니다.</strong>
 	</div>
+	
+	<!--modal창 사용.사용자 알림메시지 띄우는 것  -->
+	<c:if test="${sessionScope.messageContent!=null}">
+		${sessionScope.messageContent}
+	</c:if>
+	<c:if test="${sessionScope.messageType!=null}">
+		${sessionScope.messageType}
+	</c:if>
+	
+	<c:if test="${messageContent!=null}">
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="vertical-alignment-helper">
+				<div class="modal-dialog vertical-align-center">
+					<div class="modal-content">
+						<c:choose>
+							<c:when test="${sessionScope.messageType=='오류 메시지'}">
+								<c:out value="panel-waring"></c:out>
+							</c:when>
+							<c:otherwise>
+								<c:out value="panel-success"></c:out>
+							</c:otherwise>
+						</c:choose>
+						
+						<div class="modal-header panel-heading">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times</span> <!-- x버튼에 해당하는 그림문자 띄움 -->
+								<span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title">
+								${sessionScope.messageType}
+							</h4>
+						</div>	
+						<!-- 메시지 내용 사용자에게 보여줄건지 -->
+						<div class="modal-body">
+							${sessionScope.messageContent}
+						</div>
+						<div class="modal-footer">
+							<!--닫기버튼  -->
+							<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$('#messageModal').modal("show"); //사용자에게 모달창 보여지게
+		</script>
+		<!-- session.removeAttribute("messageContent"); -->
+		
+		<%-- 
+		<c:remove var="${sessionScope.messageContent}"/> <!-- 모달창 띄워준 다음 세션 파기해줌. 단 한번만 사용자에게 메시지 보여줄 수 있게 만듬. -->
+		<c:remove var="${sessionScope.messageType}"/>
+		
+		오류생긴다
+		 --%>
+		<!-- 위 2개는 서버로 부터 받은 어떠한 세션 값   .회원가입시도시 오류가 발생하면 이 메시지가 세션값으로 설정되는 것.-->
+	</c:if>
+	
+	<!-- modal. 회원가입 아이디 중복체크할때 설정.중복체크할때마다 여부에 따라 이 쪽부분이 실제 사용자 화면에 띄워짐. -->
+	<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="vertical-alignment-helper">
+				<div class="modal-dialog vertical-align-center">
+					<div id="checkType" class="modal-content panel-info"><!--정보를 띄워주는 모달창  -->
+						<div class="modal-header panel-heading">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times</span> <!-- x버튼에 해당하는 그림문자 띄움 -->
+								<span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title">
+								확인 메시지
+							</h4>
+						</div>	
+						<!-- 메시지 내용 사용자에게 보여줄건지 -->
+						<div id="checkMessage" class="modal-body">
+						</div>
+						<div class="modal-footer">
+							<!--닫기버튼  -->
+							<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#messageModel').modal("show");
+	</script>
+	<%-- 
+	<%
+		session.removeAttribute("messageContent");
+		session.removeAttribute("messageType");
+		}
+	%>	
+	 --%>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		chatListFunction('ten');
+		getInfiniteChat();
+	});
+	
+	</script>
+		
 </body> 
 </html>

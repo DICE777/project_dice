@@ -108,9 +108,9 @@ public class ChatController {
 		
 		return result;
 	}
-	/*
+	
 	//사용자가 주고받은 대화를 반환해줌
-	@RequestMapping(value="/",method=RequestMethod.POST)
+	@RequestMapping(value="/chatList",method=RequestMethod.POST)
 	public String ChatList(ChatDTO chatDTO,Model model) {
 		
 		ChatDAO mapper = session.getMapper(ChatDAO.class);
@@ -129,7 +129,7 @@ public class ChatController {
 		
 		return "chat";
 	}
-	
+	/*
 	//제이슨 : 어떠한 개발언어든 공통적으로 사용할 수 있는 1개의 배열같은 것들을 표현하고 담을 수 있는 약속
 	public String getTen(String fromID, String toID, String chatID) {
 		StringBuffer result = new StringBuffer("");
@@ -150,6 +150,6 @@ public class ChatController {
 			result.append("{\"value\":\""+)
 		}
 		return result.toString();
-	}
-		*/
+	}*/
+		
 }
