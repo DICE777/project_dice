@@ -95,17 +95,14 @@ public class ChatController {
 		System.out.println(result);
 		
 		//String fromID= request.getParameter("fromID");
-		/*
+		
 		int fromID = chatDTO.getChatID();
 		String toID = chatDTO.getToID();
 		String chatContent= chatDTO.getChatContent();
 		
-		/*if(fromID==0 || toID==null || toID.equals("") || chatContent ==null || chatContent.equals("")) {
-			model.addAttribute("0");
-		} else {
-			model.addAttribute(result);
-			//response.getWriter().write(new ChatDAO().submit(fromID,toID,chatContent)+"");
-		}*/
+		if(fromID==0 || toID==null || toID.equals("") || chatContent ==null || chatContent.equals("")) {
+			return 0;
+		}
 		
 		
 		return result;
@@ -113,25 +110,49 @@ public class ChatController {
 	
 	//사용자가 주고받은 대화를 반환해줌
 	@RequestMapping(value="/chatList",method=RequestMethod.POST)
-	public String ChatList(ChatDTO chatDTO,Model model) {
+	public @ResponseBody ArrayList<ChatDTO> ChatList(@RequestBody ChatDTO chatDTO,Model model) {
 		
+		System.out.println(chatDTO);
 		ChatDAO mapper = session.getMapper(ChatDAO.class);
 		
-		mapper.getChatListByID(chatDTO);
-		
+		ArrayList<ChatDTO> chatList = mapper.getChatListByID(chatDTO);
+		System.out.println(chatList);
 		String fromID = chatDTO.getFromID();
 		String toID = chatDTO.getToID();
 		
+		//String result = "";
 		
 		if(fromID==null || toID==null || toID.equals("")) {
-			model.addAttribute("");
-		} else if(chatDTO!=null) {
-			
+			return null;
 		}
+			/*result += "{\"result\":[";
+			for(int i=0; i<chatList.size(); i++) {
+				result += "[{\"value\": \"" + chatList.get(i).getFromID()+ "\"},";
+				result += "{\"value\": \"" + chatList.get(i).getToID()+ "\"},";
+				result += "{\"value\": \"" + chatList.get(i).getChatContent()+ "\"},";
+				result += "{\"value\": \"" + chatList.get(i).getChatTime()+ "\"}]";
+				if(i!=chatList.size()-1) result+=",";
+			}
+			result += "],\"last\":\""+chatList.get(chatList.size()-1).getChatID()+"\"}";*/
+	
 		
-		
-		return "chat";
+		return chatList;
 	}
+			
+/*			result = new StringBuffer("");
+			result.append("{\"result\":[");
+			
+			for(int i=0; i<chatList.size(); i++) {
+				result.append("[{\"value\": \"" + chatList.get(i).getFromID()+ "\"},");
+				result.append("{\"value\": \"" + chatList.get(i).getToID()+ "\"},");
+				result.append("{\"value\": \"" + chatList.get(i).getChatContent()+ "\"},");
+				result.append("{\"value\": \"" + chatList.get(i).getChatTime()+ "\"}]");
+				if(i!=chatList.size()-1) result.append(",");	
+			}
+			result.append("],\"last\":\""+chatList.get(chatList.size()-1).getChatID()+"\"}");
+		}
+		return result.toString();
+	}*/
 	/*
 	//제이슨 : 어떠한 개발언어든 공통적으로 사용할 수 있는 1개의 배열같은 것들을 표현하고 담을 수 있는 약속
 	 * 밑에 주석 정확한거 아님 다 수정해야함
@@ -160,9 +181,9 @@ public class ChatController {
 			//
 		}
 		return result.toString();
-	}
+	}*/
 	
-		public String getID(String fromID, String toID, String chatID) {
+		/*public String getID(String fromID, String toID, String chatID) {
 		StringBuffer result = new StringBuffer("");
 		result.append("{\"result\":[");
 		
@@ -173,9 +194,7 @@ public class ChatController {
 		
 		ChatDAO mapper = session.getMapper(ChatDAO.class);
 		
-		RowBounds rb = new RowBounds(1, 10);
-		
-		ArrayList<ChatDTO> chatList = mapper.getChatListByID(chatDTO,rb);
+		ArrayList<ChatDTO> chatList = mapper.getChatListByID(chatDTO);
 		if(chatList.size()==0) return ""; //chatList가 비어있으면 공백문자 반환
 		for(int i =0; i<chatList.size(); i++) {  //있으면 대화내용출력하게 
 			result.append("{\"value\":\""+chatList.get(i).getFrom()+              
@@ -186,7 +205,7 @@ public class ChatController {
 			//
 		}
 		return result.toString();
-	}
-	*/
+	}*/
+	
 		
 }

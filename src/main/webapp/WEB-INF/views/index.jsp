@@ -97,6 +97,7 @@
 		</div>
 	</nav>
 	<div class="header">
+		<br/>
 		<p style="text-align: center;">
 			<img src="./resources/images/header.jpg" style="width: 500px; height: 500;">
 			<h1 style="text-align: center;">너의 이야기를 들려줘</h1>

@@ -52,9 +52,9 @@
 			var fromID = $('.userId').val();
 			var toID = $('.toId').val(); 
 			var chatContent = $('#chatContent').val(); //입력한 값을 가져올 수 있게함.
-			 alert('aa');
+
 			var sendData = {"chatID" : chatID,"fromID" : fromID,"toID" : toID,"chatContent" : chatContent};
-			alert('bb');
+		
 			$.ajax({
 				method: "POST",
 				url: "ChatSubmit",
@@ -78,26 +78,36 @@
 			//성공적으로 값을 보냈은 아니든 
 			$('#chatContent').val(''); //메시지 보냈으니 값을 비워줘.
 		} 
-		var lastID = 0; //가장 마지막으로 대화 데이터의 chatID가 됨
+		//var lastID = 0; //가장 마지막으로 대화 데이터의 chatID가 됨
 		function chatListFunction(type){
 			var fromID =$('.userId').val();
 			var toID = $('.toId').val(); 
+			var chatID = $('.chatId').val();
+			
+			var sendData =  {"fromID" : fromID,"toID" : toID,"chatID" : chatID};
+
 			$.ajax({
 				
-				type: "POST",
+				method: "POST",
 				url: "chatList",
-				data: {
-					fromID : encodeURIComponent(fromID),
-					toID : encodeURIComponent(toID),
-				}, 
+				data: JSON.stringify(sendData),
+				dataType: "json",
+				contentType: 'application/json;charset=UTF-8',
 				success: function(data){
-					if(data=="") return;
-					var parsed = JSON.parse(data); //제이슨 형태로 파싱하고
-					var result = parsed.result; //result에 담아줌
-					for(var i=0; i<result.length; i++){ //실제화면에 메시지 하나씩 출력
-						addChat(result[i][0].value, result[i][2].value, result[i][3].value);
+					if(data==null) return;
+					//var parsed = JSON.parse(data); //제이슨 형태로 파싱하고
+					$('#chatList').html('');
+					for(i in data){
+						if(data[i].fromID!=null && data[i].toID!=null && data[i].chatContent!=null){
+							addChat(data[i].fromID,data[i].chatContent,data[i].chatTime);
+						}
 					}
-					lastID= Number(parsed.last); //chatList컨트롤러에서 last에 해당하는 가장 마지막에 전달받은하는 chatID가져올수있게해줌.
+					
+					//var result = parsed.result; //result에 담아줌
+				/* 	for(var i=0; i<result.length; i++){ //실제화면에 메시지 하나씩 출력
+						addChat(result[i][0].value, result[i][2].value, result[i][3].value);
+					} */
+					//lastID= Number(parsed.last); //chatList컨트롤러에서 last에 해당하는 가장 마지막에 전달받은하는 chatID가져올수있게해줌.
 				}
 			});
 		}
@@ -142,9 +152,11 @@
 			$('#chatList').scrollTop($('#chatList')[0].scrollHeight); //스크롤 가장 아래쪽으로 내려줘서 메시지 올때마다 보여줄수있게해줌.
 		}
 		function getInfiniteChat(){ //몇 초 간격으로 새로운 메시지 가져오는 걸 의미
+			
+			var chatID = $('.chatId').val();
 			setInterval(function(){
-				chatListFunction(lastID);
-			},3000); //3초에 1번씩 실행됨
+				chatListFunction(chatID);
+			},100); //3초에 1번씩 실행됨
 		}
 	</script>
 </head>
