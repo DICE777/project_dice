@@ -104,6 +104,7 @@
 				</tr>
 				<tr>
 					<th style="background-color: #fafafa; color: #000000; width: 70px;"><h5>번호</h5></th>
+					<th style="background-color: #fafafa; color: #000000; width: 100px;"><h5>분야</h5></th>
 					<th style="background-color: #fafafa; color: #000000;"><h5>제목</h5></th>
 					<th style="background-color: #fafafa; color: #000000;"><h5>작성자</h5></th>
 					<th style="background-color: #fafafa; color: #000000; width: 100px;"><h5>작성 날짜</h5></th>
@@ -113,6 +114,7 @@
 			<c:forEach var="board" items="${boardList}">
 				<tr>
 					<td>${board.boardID}</td>
+					<td>${board.thema}</td>
 					<td><a href="chat?chatID=${board.boardID}">${board.boardTitle}</a></td>
 					<td>${board.userID}</td>
 					<td>${board.boardDate}</td>

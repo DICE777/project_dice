@@ -43,8 +43,6 @@ public class BoardController {
 		//보내줄 때 객체의 이름
 		model.addAttribute("boardList", result);
 		
-		
-		
 		return "boardView";
 		
 	}

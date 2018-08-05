@@ -65,3 +65,66 @@ tr th:last-child{
 	margin: 0 auto;
 	pointer-events : all;
 }
+
+/*전체 링크 영역  */
+a {
+	color : #000000;
+	text-decoration : none;
+}
+
+a:hover{
+	color: #bbbbbb;
+	text-decoration : none;
+	cursor : pointer;
+}
+
+
+/* 내비게이션 영역 */
+.navbar-default { /* 내비게이션 바 배경 색상  */
+	background-color : #006DCC;
+	border-color : #006DCC;
+	border-bottom-color : #dddddd;
+	border-bottom-width : 3px;
+	border-radius : 0px;
+}
+
+.navbar-default .navbar-brand { /* 내비게이션 바 제목 색상  */
+	color: #ffffff;
+	padding-top : 25px;
+	font-family : 'Hanna';
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:foucs {/* 내비게이션 제목에 마우스 올려놓을 때 */
+	color: #dddddd;
+	background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .active >a,
+.navbar-default .navbar-nav > .active >a:hover,
+.navbar-default .navbar-nav > .active >a:focus{
+	color: #ffffff;
+	background-color: #1456b8;
+}
+.navbar-default .navbar-nav > li > a { /*내비게이션 글자 기본 폰트 변경  */
+	color: white;
+	font-family :'Noto Sans KR';
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus { /* 내비게이션 글자에 마우스를 올렸을 때 */
+	color: #dddddd;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nab > .open > a:hover,
+.navbar-default .navbar-nab > .open > a:focus{ /* 열림 드랍다운 마우스 색상 이벤트 */
+	color: #006DCC;
+	text-decoration: none;
+	background-color: #ffffff;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus{ /*토글에 마우스를 올렸을 때  */
+	background-color: #1456B8;
+}
+.navbar-default .navbar-toggle .icon-bar { /* 토글 아이콘 바 색상 */
+	background-color: #dddddd;
+}

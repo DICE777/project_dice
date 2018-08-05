@@ -107,8 +107,26 @@
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
-						<td><h5>${sessionScope.userID}</h5>
+						<td align="left"><h5>&nbsp;${sessionScope.userID}</h5>
 						<input type="hidden" name="userID" value="${sessionScope.userID}"></td>
+					</tr>
+					<tr>
+						<td style="width: 110px;"><h5>분야</h5></td>
+						<td align="left">
+						<select id="thema" name="thema">
+						  <option value="종합">종합</option>
+						  <option value="정치">정치</option>
+						  <option value="경제">경제</option>
+						  <option value="사회">사회</option>
+						  <option value="문화">문화</option>
+						  <option value="교육">교육</option>
+						  <option value="과학/IT">과학/IT</option>
+						  <option value="역사">역사</option>
+						  <option value="철학">철학</option>
+						  <option value="스포츠">스포츠</option>
+						  <option value="환경">환경</option>
+						</select>
+						</td>	
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>토론 제목</h5></td>

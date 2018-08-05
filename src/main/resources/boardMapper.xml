@@ -12,11 +12,12 @@ INSERT INTO BOARD
 (
 	boardID,
 	userID,
+	thema,
 	boardTitle
 )
 VALUES
 (
- board_seq.nextVal, #{userID}, #{boardTitle}
+ board_seq.nextVal, #{userID}, #{thema},#{boardTitle}
 )
 </insert>
 
@@ -26,7 +27,8 @@ SELECT
 	boardID,
 	userID,
 	boardTitle,
-	TO_CHAR(boardDate,'YYYY-MM-DD') AS boardDate
+	TO_CHAR(boardDate,'YYYY-MM-DD') AS boardDate,
+	thema
 FROM BOARD
  ORDER BY
  boardID

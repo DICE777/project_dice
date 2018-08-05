@@ -6,7 +6,7 @@ public class BoardDTO {
 	private String userID;
 	private String boardTitle;
 	private String boardDate;
-	
+	private String thema;
 	
 	public BoardDTO() {
 		super();
@@ -54,13 +54,21 @@ public class BoardDTO {
 	}
 
 
+	public String getThema() {
+		return thema;
+	}
+
+
+	public void setThema(String thema) {
+		this.thema = thema;
+	}
+
+
 	@Override
 	public String toString() {
 		return "BoardDTO [boardID=" + boardID + ", userID=" + userID + ", boardTitle=" + boardTitle + ", boardDate="
-				+ boardDate + "]";
+				+ boardDate + ", thema=" + thema + "]";
 	}
 
-	
-	
-	
+
 }
