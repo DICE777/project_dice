@@ -95,7 +95,7 @@
 		<form method="post" action="userLogin">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
-					<tr colspan="2"><h4>로그인 양식</h4></tr>
+					<tr colspan="2"><h4>로그인</h4></tr>
 				</thead>
 				<tbody>
 					<tr>

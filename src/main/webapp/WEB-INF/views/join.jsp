@@ -171,7 +171,7 @@
 			<table class="table table-bordered table-hover" style="text-align: center; border :1px solid #dddddd">
 				<thead>
 					<tr><!--제목. 3개 정도 열 차지  -->
-						<th colspan="3"><h4>회원 등록 양식</h4></th>
+						<th colspan="3"><h4>회원 가입</h4></th>
 					</tr>
 				</thead>
 				
