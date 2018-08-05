@@ -65,6 +65,12 @@ public class HomeController {
 		
 		hsession.setAttribute("userID", result.getUserID());
 		
+		if(result.getUserID().equals("aaa")) {
+			hsession.setAttribute("toID", "bbb");
+		}else if(result.getUserID().equals("bbb")) {
+			hsession.setAttribute("toID", "aaa");
+		}
+		
 		System.out.println("로그인 메소드 완료");
 		
 		return "redirect:/";

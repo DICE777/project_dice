@@ -22,9 +22,11 @@ public class ChatController {
 	SqlSession session;
 	
 	//채팅 페이지
-	@RequestMapping(value="/chat")
-	public String chatGO() {
-				
+	@RequestMapping(value="/chat",method=RequestMethod.GET)
+	public String chatGO(ChatDTO chatDTO,Model model) {
+		
+		model.addAttribute("chatID", chatDTO.getChatID());
+		
 		return "chat";
 	}
 	
@@ -82,7 +84,7 @@ public class ChatController {
 	
 	//전송
 	@RequestMapping(value="/ChatSubmit",method=RequestMethod.POST)
-	public @ResponseBody int ChatSubmit(ChatDTO chatDTO) { //내가 넘겨줄 값의 타입을 적는 것. 여기서는 int.
+	public @ResponseBody int ChatSubmit(@RequestBody ChatDTO chatDTO) { //내가 넘겨줄 값의 타입을 적는 것. 여기서는 int.
 		
 		System.out.println(chatDTO);		
 		

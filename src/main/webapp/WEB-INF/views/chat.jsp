@@ -4,15 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!--메인 페이지 세션값 설정-해당아이디 -->
+	<%-- <!--메인 페이지 세션값 설정-해당아이디 -->
 	<c:if test="${sessionScope.userID!=null}">
 		${sessionScope.userID}
-	</c:if>
-
+	</c:if> --%>
+<%-- 
 	<c:if test="${sessionScope.toID!=null}">
 		${sessionScope.toID}
 	</c:if>
-	
+	 --%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<!--반응형 웹 적용(밑에설명O)  -->
@@ -48,19 +48,19 @@
 		//메시지보내는 submit기능
 		function submitFunction(){
 			
+			var chatID = $('.chatId').val();
 			var fromID = $('.userId').val();
 			var toID = $('.toId').val(); 
 			var chatContent = $('#chatContent').val(); //입력한 값을 가져올 수 있게함.
-			
+			 alert('aa');
+			var sendData = {"chatID" : chatID,"fromID" : fromID,"toID" : toID,"chatContent" : chatContent};
+			alert('bb');
 			$.ajax({
-				type: "POST",
+				method: "POST",
 				url: "ChatSubmit",
-				data: {
-					fromID : encodeURIComponent(fromID),
-					toID : encodeURIComponent(toID),
-					chatContent : encodeURIComponent(chatContent),
-				},
-				dataType: 'text',
+				data: JSON.stringify(sendData),
+				dataType: 'json',
+				contentType: 'application/json;charset=UTF-8',
 				success: function(result){
 					if(result==1){
 						autoClosingAlert('#successMessage',2000); //성공하면  팝업알림창들 띄워줌 ex) 메시지 성공했습니다 //2초동안
@@ -151,6 +151,7 @@
 <body>
 	<input class="userId" type="hidden" value="${sessionScope.userID}">
 	<input class="toId" type="hidden" value="${sessionScope.toID}">
+	<input class="chatId" type="hidden" value="${chatID}">
 	
 	<!--네비게이션 바 만듬  -->
 	<nav class="navbar navbar-default">

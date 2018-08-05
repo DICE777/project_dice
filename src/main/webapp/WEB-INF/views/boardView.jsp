@@ -113,7 +113,7 @@
 			<c:forEach var="board" items="${boardList}">
 				<tr>
 					<td>${board.boardID}</td>
-					<td>${board.boardTitle}</td>
+					<td><a href="chat?chatID=${board.boardID}">${board.boardTitle}</a></td>
 					<td>${board.userID}</td>
 					<td>${board.boardDate}</td>
 				</tr>

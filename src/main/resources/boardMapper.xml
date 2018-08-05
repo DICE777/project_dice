@@ -28,8 +28,6 @@ SELECT
 	boardTitle,
 	TO_CHAR(boardDate,'YYYY-MM-DD') AS boardDate
 FROM BOARD
-WHERE
- userID=#{userID}
  ORDER BY
  boardID
 </select>

@@ -12,8 +12,6 @@
  CHAT
  WHERE
  ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
- AND
- chatID>#{chat_sequence.nextVal}
  ORDER BY
  chatTime
  </select>
@@ -21,7 +19,9 @@
  ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
  ::보낸사람이든 받은 사람이든 두 경우에 해당이 되면 모두 가져올 수 있게.
  
- chatID>#{chat_sequence.nextVal} ::채팅아이디가 {}가 클 때 가져오도록.
+ chatID>chat_sequence.nextVal ::채팅아이디가 {}가 클 때 가져오도록.
+  AND
+ chatID>chat_sequence.nextVal
   -->
   
   
@@ -46,7 +46,7 @@
  <!--누가  누구에게 메시지를 보냈다고 적어주는 기능  -->
  <insert id="submit" parameterType="ChatDTO">
  INSERT INTO CHAT
- VALUES(chat_sequence.nextVal, #{fromID}, #{toID}, #{chatContent}, SYSDATE
+ VALUES(#{chatID}, #{fromID}, #{toID}, #{chatContent}, SYSDATE
  )
  </insert>
  <!--
