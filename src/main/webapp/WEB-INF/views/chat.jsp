@@ -99,7 +99,8 @@
 					$('#chatList').html('');
 					for(i in data){
 						if(data[i].fromID!=null && data[i].toID!=null && data[i].chatContent!=null){
-							addChat(data[i].fromID,data[i].chatContent,data[i].chatTime);
+						
+							addChat(data[i].id,data[i].fromID,data[i].chatContent,data[i].chatTime);
 						}
 					}
 					
@@ -125,8 +126,9 @@
 			{value:Fromid,toId,chatcontent,chattime}]
 		
 		 */
+		
 		//채팅보낸사람,어떤내용,언제보냈는지 실제로 우리 화면에 출력하게 만들어줌
-		function addChat(chatName, chatContent, chatTime){
+		function addChat(id,chatName, chatContent, chatTime){
 			//chatList에 어떠한 내용을 추가적으로 넣어주는거(div에)
 			$('#chatList').append('<div class="row">'+
 						'<div class="col-lg-12">' +
@@ -139,6 +141,8 @@
 						chatName +
 						'<span class= "small pull-right">'+
 						chatTime +
+						'<input type="hidden" value="'+id+'">'+
+						'&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="goodButton" value="GOOD" style="width:70px;"/>'+
 						'</span>'+
 						'</h4>'+
 						'<p>'+

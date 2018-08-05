@@ -138,6 +138,8 @@ public class ChatController {
 		
 		return chatList;
 	}
+	
+	
 			
 /*			result = new StringBuffer("");
 			result.append("{\"result\":[");

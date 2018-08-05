@@ -19,12 +19,16 @@ CREATE TABLE CHATUSER(
 ---채팅 테이블---
 
 CREATE TABLE CHAT(
+    id NUMBER PRIMARY KEY,
     chatID NUMBER,
     fromID VARCHAR2(20),
     toID VARCHAR2(20),
     chatContent VARCHAR(100),
-    chatTime DATE
+    chatTime DATE,
+    goodButton NUMBER DEFAULT '0'
 );
+
+CREATE SEQUENCE chat_seq;
 
 commit;
 

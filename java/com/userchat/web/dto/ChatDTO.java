@@ -1,11 +1,14 @@
 package com.userchat.web.dto;
 
 public class ChatDTO {
+	
+	private int id;
 	private int chatID;
 	private String fromID;
 	private String toID;
 	private String chatContent;
 	private String chatTime;
+	private int goodButton;
 	
 	public ChatDTO() {
 		super();
@@ -41,11 +44,27 @@ public class ChatDTO {
 	public void setChatTime(String chatTime) {
 		this.chatTime = chatTime;
 	}
+	public int getGoodButton() {
+		return goodButton;
+	}
+	public void setGoodButton(int goodButton) {
+		this.goodButton = goodButton;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
-		return "ChatDTO [chatID=" + chatID + ", fromID=" + fromID + ", toID=" + toID + ", chatContent=" + chatContent
-				+ ", chatTime=" + chatTime + "]";
+		return "ChatDTO [id=" + id + ", chatID=" + chatID + ", fromID=" + fromID + ", toID=" + toID + ", chatContent="
+				+ chatContent + ", chatTime=" + chatTime + ", goodButton=" + goodButton + "]";
 	}
+	
+	
+	
 	
 	
 	

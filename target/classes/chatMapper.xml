@@ -34,7 +34,7 @@
  WHERE
  ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
  AND
- chatID>(SELECT MAX(chatID) - #{chat_sequence.nextVal} FROM CHAT)
+ chatID>(SELECT MAX(chatID) - #{chat_seq.nextVal} FROM CHAT)
  AND
  <![CDATA[ ROWNUM <= 10 ]]>
  ORDER BY
@@ -48,7 +48,7 @@
  <!--누가  누구에게 메시지를 보냈다고 적어주는 기능  -->
  <insert id="submit" parameterType="ChatDTO">
  INSERT INTO CHAT
- VALUES(#{chatID}, #{fromID}, #{toID}, #{chatContent}, SYSDATE
+ VALUES(chat_seq.nextVal,#{chatID}, #{fromID}, #{toID}, #{chatContent}, SYSDATE, #{goodButton}
  )
  </insert>
  <!--
@@ -68,4 +68,16 @@
  SYSDATE
  )
    -->
+   
+ <!-- 좋아요 버튼 -->
+ <update id="updateButton" parameterType="ChatDTO">
+ UPDATE
+ CHAT
+ SET
+ (
+ 	goodButton = 1
+ )
+ WHERE
+ id=#{id}
+ </update>
  </mapper>
