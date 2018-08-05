@@ -53,6 +53,9 @@
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
 				<li class="active"><a href="./">메인</a>
+				<c:if test="${sessionScope.userID!=null}">
+				<li class="active"><a href="boardView">토론 게시판</a></li>
+				</c:if>
 			</ul>
 			
 			
@@ -93,6 +96,12 @@
 			</c:if> 
 		</div>
 	</nav>
-
+	<div class="header">
+		<p style="text-align: center;">
+			<img src="./resources/images/header.jpg" style="width: 500px; height: 500;">
+			<h1 style="text-align: center;">너의 이야기를 들려줘</h1>
+		</p>
+			
+	</div>
 </body> 
 </html>

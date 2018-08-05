@@ -7,10 +7,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>		
 		<typeAlias type = "com.userchat.web.dto.UserDTO" alias = "UserDTO" />
 		<typeAlias type = "com.userchat.web.dto.ChatDTO" alias = "ChatDTO" />
+		<typeAlias type = "com.userchat.web.dto.BoardDTO" alias = "BoardDTO" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="UserMapper.xml" />	
 		<mapper resource="chatMapper.xml" />
+		<mapper resource="boardMapper.xml" />
 	</mappers>
 </configuration>

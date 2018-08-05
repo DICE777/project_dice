@@ -51,6 +51,9 @@
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
 				<li class="active"><a href="./">메인</a>
+				<c:if test="${sesseionScope.userID!=null}">
+				<li class="active"><a href="boardView">토론 게시판</a></li>
+				</c:if>
 			</ul>
 			
 			
