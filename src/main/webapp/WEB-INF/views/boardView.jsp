@@ -13,7 +13,6 @@
 	<!--css파일 불러올 수 있게함  -->
 	<link rel="stylesheet" href="./resources/css/bootstrap.css">
 	<link rel="stylesheet" href="./resources/css/custom.css">
-<!-- 	<link rel="stylesheet" href="./resources/css/chatBoard.css"> -->
 	
 	<title>Just Say It</title>
 	
@@ -25,12 +24,7 @@
 	
 </head>
 <body>
-<%-- 
-	<!--메인 페이지 세션값 설정-해당아이디 -->
-	<c:if test="${sessionScope.userID!=null}">
-		${sessionScope.userID}
-	</c:if>
- --%>
+
 	
 	<!--네비게이션 바 만듬  -->
 	<nav class="navbar navbar-default">
@@ -54,6 +48,8 @@
 				<!--리스트의 항목  -->
 				<li class="active"><a href="./">메인</a>
 				<li class="active"><a href="boardView">토론 게시판</a></li>
+				<li class="active"><a href="boardView2">결론</a></li>
+				
 			</ul>
 			
 			

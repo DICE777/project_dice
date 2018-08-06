@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- CHAT SQL -->
+ <mapper namespace="com.userchat.web.dao.BoardDAO2">
+
+
+<!--게시글 가져오기  -->
+<select id="selectBoard" parameterType="BoardDTO" resultType="BoardDTO">
+SELECT
+	boardID,
+	boardTitle,
+	TO_CHAR(boardDate,'YYYY-MM-DD') AS boardDate,
+	thema
+FROM BOARD
+ ORDER BY
+ boardID
+</select>
+
+</mapper>
+

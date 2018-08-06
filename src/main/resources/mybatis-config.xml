@@ -14,5 +14,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="UserMapper.xml" />	
 		<mapper resource="chatMapper.xml" />
 		<mapper resource="boardMapper.xml" />
+		<mapper resource="boardMapper2.xml" />
+		
 	</mappers>
 </configuration>

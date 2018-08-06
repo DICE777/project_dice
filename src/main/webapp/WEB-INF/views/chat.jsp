@@ -4,15 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%-- <!--메인 페이지 세션값 설정-해당아이디 -->
-	<c:if test="${sessionScope.userID!=null}">
-		${sessionScope.userID}
-	</c:if> --%>
-<%-- 
-	<c:if test="${sessionScope.toID!=null}">
-		${sessionScope.toID}
-	</c:if>
-	 --%>
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<!--반응형 웹 적용(밑에설명O)  -->
@@ -103,29 +95,11 @@
 							addChat(data[i].id,data[i].fromID,data[i].chatContent,data[i].chatTime);
 						}
 					}
-					
-					//var result = parsed.result; //result에 담아줌
-				/* 	for(var i=0; i<result.length; i++){ //실제화면에 메시지 하나씩 출력
-						addChat(result[i][0].value, result[i][2].value, result[i][3].value);
-					} */
-					//lastID= Number(parsed.last); //chatList컨트롤러에서 last에 해당하는 가장 마지막에 전달받은하는 chatID가져올수있게해줌.
 				}
 			});
 		}
 		
 
-		/* 
-		result : [ [{value:FromID}, {value:toId}, {value:chatcontent}, {value:chattime}]   ]
-		
-		[{value:Fromid},{value:toId},{value:toId},{value:toId}},
-			{value:Fromid,toId,chatcontent,chattime},
-			{value:Fromid,toId,chatcontent,chattime},
-			{value:Fromid,toId,chatcontent,chattime},
-			{value:Fromid,toId,chatcontent,chattime},
-			{value:Fromid,toId,chatcontent,chattime},
-			{value:Fromid,toId,chatcontent,chattime}]
-		
-		 */
 		
 		//채팅보낸사람,어떤내용,언제보냈는지 실제로 우리 화면에 출력하게 만들어줌
 		function addChat(id,chatName, chatContent, chatTime){
@@ -142,7 +116,7 @@
 						'<span class= "small pull-right">'+
 						chatTime +
 						'<input type="hidden" value="'+id+'">'+
-						'&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="goodButton" value="GOOD" style="width:70px;"/>'+
+						'&nbsp;&nbsp;<input type="button" class="btn btn-primary" id="goodButton" value="GOOD" style="width:70px; "/>'+
 						'</span>'+
 						'</h4>'+
 						'<p>'+
@@ -191,6 +165,7 @@
 				<!--리스트의 항목  -->
 				<li class="active"><a href="./">메인</a>
 				<li class="active"><a href="boardView">토론 게시판</a></li>
+				<li class="active"><a href="boardView2">결론</a></li>
 			</ul>
 			
 			
@@ -249,19 +224,12 @@
 						<div id="chatList" class="portlet-body chat-widget" style="overflow-y: auto; width:auto; height:600px;">
 						</div>
 						<div class="portlet-footer">
-							<!--
-							필요없는 부분
-							 <div class="row">
-								<div class="form-group col-xs-4">
-									<input style="hegiht:40px;" type="text" id="chatName" class="form-control" placeholder="이름" maxlength="8">
-								</div>
-							</div> -->
 							<div class="row" style="height:90px;">
 								<div class="form-group col-xs-10">
 									<textarea style="hegiht:80px;"	id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 								</div>
 								<div class="form-group col-xs-2">
-									<button type="button" class="btn btn-default pull-right" id="send">전송</button> <!--onclick="submitFunction();"  -->
+									<button type="button" class="btn btn-default pull-right" id="send">전송</button> 
 									<div class="clearfix"></div>
 									
 								</div>
@@ -330,15 +298,6 @@
 		<script>
 			$('#messageModal').modal("show"); //사용자에게 모달창 보여지게
 		</script>
-		<!-- session.removeAttribute("messageContent"); -->
-		
-		<%-- 
-		<c:remove var="${sessionScope.messageContent}"/> <!-- 모달창 띄워준 다음 세션 파기해줌. 단 한번만 사용자에게 메시지 보여줄 수 있게 만듬. -->
-		<c:remove var="${sessionScope.messageType}"/>
-		
-		오류생긴다
-		 --%>
-		<!-- 위 2개는 서버로 부터 받은 어떠한 세션 값   .회원가입시도시 오류가 발생하면 이 메시지가 세션값으로 설정되는 것.-->
 	</c:if>
 	
 	<!-- modal. 회원가입 아이디 중복체크할때 설정.중복체크할때마다 여부에 따라 이 쪽부분이 실제 사용자 화면에 띄워짐. -->
@@ -371,13 +330,7 @@
 	<script>
 		$('#messageModel').modal("show");
 	</script>
-	<%-- 
-	<%
-		session.removeAttribute("messageContent");
-		session.removeAttribute("messageType");
-		}
-	%>	
-	 --%>
+	
 	<script type="text/javascript">
 	//함수실행하게 3초간격으로 채팅메시지 가져올수있어!
 	$(document).ready(function(){

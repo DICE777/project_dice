@@ -111,7 +111,7 @@ public class HomeController {
 		if(userID==null || userID.equals("") || userPassword==null || userPassword.equals("")
 				|| userPassword2==null || userPassword2.equals("")|| userName==null || userName.equals("")
 				|| userAge==0 || userGender==null || userGender.equals("")|| userEmail==null || userEmail.equals("")) {
-			//request.getSession().setAttribute("messageType", "오류 메시지");
+			
 			hsession.setAttribute("messageType", "오류 메시지");
 			hsession.setAttribute("messageContent", "모든 내용을 입력하세요.");
 			return "join";
@@ -159,20 +159,5 @@ public class HomeController {
 	}
 	
 	
-	/*
-	//작업중인거
-	@RequestMapping(value="/UserRegisterCheck",method=RequestMethod.POST)
-	public @ResponseBody int UserRegisterCheck(UserDTO userDTO) {
-		
-		UserDAO mapper = session.getMapper(UserDAO.class);
-		
-		int result= mapper.idcheck(userDTO);
-		
-		System.out.println(result);
-		
-		return result;
-		
-	}
-	
-		*/
+
 }

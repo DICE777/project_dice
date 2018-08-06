@@ -15,16 +15,6 @@
  ORDER BY
  chatTime
  </select>
-<!-- 
-
-
- ((fromID=#{fromID} AND toID=#{toID}) OR (fromID=#{fromID} AND toID=#{toID}))
- ::보낸사람이든 받은 사람이든 두 경우에 해당이 되면 모두 가져올 수 있게.
- 
- chatID>chat_sequence.nextVal ::채팅아이디가 {}가 클 때 가져오도록.
-  AND
- chatID>chat_sequence.nextVal
-  -->
   
   
  <!-- 대화 내역 중 최근 몇개만 뽑아서 가져오는 것  --> 
@@ -40,10 +30,6 @@
  ORDER BY
  chatTime
  </select>
- <!-- 
-  현재 채팅DB테이블안에서 가장 채트아이디가 큰 거에서 물음표만큼 빼줌.
-  물음표에 들어가는거 넘버임.
-  -->
  
  <!--누가  누구에게 메시지를 보냈다고 적어주는 기능  -->
  <insert id="submit" parameterType="ChatDTO">
@@ -51,23 +37,7 @@
  VALUES(chat_seq.nextVal,#{chatID}, #{fromID}, #{toID}, #{chatContent}, SYSDATE, #{goodButton}
  )
  </insert>
- <!--
- 전송여부 확인이라 int
- null값 넣으므로써 chatID가 1개 자동으로 증가
- 보낸사람
- 받는사람
- 채팅메시지
- 현재시각
- INSERT INTO
- CHAT
- VALUES(
- NULL,
- #{fromID},
- #{toID},
- #{chatContent},
- SYSDATE
- )
-   -->
+ 
    
  <!-- 좋아요 버튼 -->
  <update id="updateButton" parameterType="ChatDTO">
@@ -80,4 +50,13 @@
  WHERE
  id=#{id}
  </update>
- </mapper>
+
+<!--채팅내용가져오기(결론)  -->
+<select id="chatContentSelect" parameterType="ChatDTO" resultType="ChatDTO">
+SELECT
+	chatContent
+FROM CHAT	
+
+</select>
+
+</mapper>

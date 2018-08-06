@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,6 +13,7 @@
 	<!--css파일 불러올 수 있게함  -->
 	<link rel="stylesheet" href="./resources/css/bootstrap.css">
 	<link rel="stylesheet" href="./resources/css/custom.css">
+
 	
 	<title>Just Say It</title>
 	
@@ -23,12 +25,7 @@
 	
 </head>
 <body>
-	<!--메인 페이지 세션값 설정-해당아이디 -->
-	<c:if test="${sessionScope.userID!=null}">
-		${sessionScope.userID}
-	</c:if>
 
-	
 	<!--네비게이션 바 만듬  -->
 	<nav class="navbar navbar-default">
 		<!--헤더 부분  -->
@@ -50,9 +47,8 @@
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
 				<li class="active"><a href="./">메인</a>
-				<c:if test="${sesseionScope.userID!=null}">
 				<li class="active"><a href="boardView">토론 게시판</a></li>
-				</c:if>
+				<li class="active"><a href="boardView2">결론</a></li>
 			</ul>
 			
 			
@@ -86,27 +82,38 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">회원관리<span class="caret"><!--caret이라는 이미지 띄워줌,아래쪽삼각형 --></span>
 					</a>
+					<ul	class="dropdown-menu">
+						<li><a href="logout">로그아웃</a></li>	
+					</ul>
 			</ul>
 			</c:if> 
 		</div>
 	</nav>
+	
+	<!--게시글 작성 -->
 	<div class="container">
-		<form method="post" action="userLogin">
+		<form action="chatContent" method="GET">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
-					<tr colspan="2"><h4>로그인</h4></tr>
+					<tr>
+						<th colspan="3"><h4>결론</h4></th>
+					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td style="width:110px;"><h5>아이디</h5></td>
-						<td><input class="form-control" type="text" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
+						<td style="width: 110px;"><h5>토론 제목</h5></td>
+						<td><input class="form-control" type="text" maxlength="50" name="boardTitle" placeholder="토론 주제를 입력하세요."></td>
 					</tr>
 					<tr>
-						<td style="width:110px;"><h5>비밀번호</h5></td>
-						<td><input class="form-control" type="password" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+						<td style="width: 110px;"><h5>내용</h5></td>
+						<td align="left">
+						<textarea rows="100" cols="100">
+							${chat.chatContent}
+						</textarea>
+						</td>	
 					</tr>
 					<tr>
-						<td style="text-align:left;" colspan="2"><input class="btn btn-primary pull-right" type="submit" value="로그인"></td>
+						<td style="text-align: left;" colspan="3"><h5 style="color: red;"></h5><input class="btn btn-primary pull-right" type="submit" value="등록"></td>
 					</tr>
 				</tbody>
 			</table>

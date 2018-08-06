@@ -13,54 +13,7 @@
 	<script src="./resources/js/bootstrap.js"></script>
 
 	<script>
-	/* $(function registerCheckFunction(){
-			
-			$("#idck").on('click',function(){
-				
-				$.ajax({
-					url: "idcheck",
-					type: "get",
-					data: {"userID":document.getElementById('userID').value},
-					success: function(result){
-						if(result==1){
-							$('#checkMessage').html('사용할 수 있는 아이디 입니다.');
-							$('#checkType').attr('class','modal-content panel-success'); //attr은 속성
-							
-						} else{
-							$('#checkMessage').html('사용할 수 없는 아이디 입니다.');
-							$('#checkType').attr('class','modal-content panel-warning');
-						}
-						$('#checkModal').modal("show");
-					}
-				});
-				
-			});
-	});	 수정중인거 */
 	
-	/* 	
-	제대로된 중복체크인데 난 실행안됨
-	function registerCheckFunction(){
-			var userID = $('#userID').val();
-			$.ajax({
-				type: 'POST',
-				url : 'UserRegisterCheck', //'./UserRegisterCheck'
-				data: {userID:userID},
-				success: function(result){
-					if(result==1){
-						$('#checkMessage').html('사용할 수 있는 아이디 입니다.');
-						$('#checkType').attr('class','modal-content panel-success'); //attr은 속성
-						
-					} else{
-						$('#checkMessage').html('사용할 수 없는 아이디 입니다.');
-						$('#checkType').attr('class','modal-content panel-warning');
-					}
-					$('#checkModal').modal("show");
-				}
-				
-			});
-		}
-		 */
-		
 		function passwordCheckFunction(){
 			var userPassword1 = $('#userPassword').val();
 			var userPassword2 = $('#userPassword2').val();
@@ -163,9 +116,8 @@
 		</div>
 	</nav>
 
-	<!--위에 까지 강좌 1  -->
 	
-	<!-- 강의2. 회원가입 -->			
+	<!-- 회원가입 -->			
 	<div class="container">
 		<form method="post" action="userRegister">
 			<table class="table table-bordered table-hover" style="text-align: center; border :1px solid #dddddd">
@@ -279,15 +231,7 @@
 		<script>
 			$('#messageModal').modal("show"); //사용자에게 모달창 보여지게
 		</script>
-		<!-- session.removeAttribute("messageContent"); -->
 		
-		<%-- 
-		<c:remove var="${sessionScope.messageContent}"/> <!-- 모달창 띄워준 다음 세션 파기해줌. 단 한번만 사용자에게 메시지 보여줄 수 있게 만듬. -->
-		<c:remove var="${sessionScope.messageType}"/>
-		
-		오류생긴다
-		 --%>
-		<!-- 위 2개는 서버로 부터 받은 어떠한 세션 값   .회원가입시도시 오류가 발생하면 이 메시지가 세션값으로 설정되는 것.-->
 	</c:if>
 	
 	<!-- modal. 회원가입 아이디 중복체크할때 설정.중복체크할때마다 여부에 따라 이 쪽부분이 실제 사용자 화면에 띄워짐. -->
@@ -324,14 +268,6 @@
 			getInfiniteChat();
 		});
 	</script>
-	<%-- 
-	<%
-		session.removeAttribute("messageContent");
-		session.removeAttribute("messageType");
-		}
-	%>	
-	 --%>
 	
-		
 </body>
 </html>

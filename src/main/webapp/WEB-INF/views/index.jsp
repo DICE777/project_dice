@@ -13,7 +13,7 @@
 	<!--css파일 불러올 수 있게함  -->
 	<link rel="stylesheet" href="./resources/css/bootstrap.css">
 	<link rel="stylesheet" href="./resources/css/custom.css">
-<!-- 	<link rel="stylesheet" href="./resources/css/chatBoard.css"> -->
+
 	
 	<title>Just Say It</title>
 	
@@ -25,15 +25,9 @@
 	
 </head>
 <body>
-<%-- 
-	<!--메인 페이지 세션값 설정-해당아이디 -->
-	<c:if test="${sessionScope.userID!=null}">
-		${sessionScope.userID}
-	</c:if>
- --%>
-	
+
 	<!--네비게이션 바 만듬  -->
-	<nav class="navbar navbar-default" style="margin-bottom: 60px;">
+	<nav class="navbar navbar-default">
 		<!--헤더 부분  -->
 		<div class="navbar-header"> 
 			<button type="button" class="navbar-toggle collapsed"
@@ -52,10 +46,10 @@
 			<!-- 1개의 리스트 -->
 			<ul class="nav navbar-nav">
 				<!--리스트의 항목  -->
-				
-				<c:if test="${sessionScope.userID!=null}">
 				<li class="active"><a href="./">메인</a>
+				<c:if test="${sessionScope.userID!=null}">
 				<li class="active"><a href="boardView">토론 게시판</a></li>
+				<li class="active"><a href="boardView2">결론</a></li>
 				</c:if>
 			</ul>
 			
@@ -97,17 +91,11 @@
 			</c:if> 
 		</div>
 	</nav>
-	
-	<div class="inner cover">
-            <h1 class="cover-heading" style="font-family: 'Nanum Gothic';font-size: 50px;" align="center">Just Say It!</h1>
-            <p class="lead" align="center">실시간 채팅으로 다양한 주제의 토론을 즐겨보세요.</p>
-    </div>
-	
 	<div class="header">
 		<br/>
 		<p style="text-align: center;">
-			<img src="./resources/images/header.jpg" style="width: 460px; ">
-			<h1></h1>
+			<img src="./resources/images/header.jpg" style="width: 500px; height: 500;">
+			<h1 style="text-align: center;">너의 이야기를 들려줘</h1>
 		</p>
 			
 	</div>
